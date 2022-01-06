@@ -2,8 +2,71 @@
 
 class Workout {
   date = new Date();
+<<<<<<< HEAD
   id = (Date.now() + "").slice(-10);
   clicks = 0;
+=======
+  id = (Date.now() + '').slice(-10);
+  clicks = 0;
+
+  constructor(coords, distance, duration) {
+    // this.date = ...
+    // this.id = ...
+    this.coords = coords; // [lat, lng]
+    this.distance = distance; // in km
+    this.duration = duration; // in min
+  }
+
+  _setDescription() {
+    // prettier-ignore
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
+      months[this.date.getMonth()]
+    } ${this.date.getDate()}`;
+  }
+
+  click() {
+    this.clicks++;
+  }
+}
+
+class Running extends Workout {
+  type = 'running';
+
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+    this.calcPace();
+    this._setDescription();
+  }
+
+  calcPace() {
+    // min/km
+    this.pace = this.duration / this.distance;
+    return this.pace;
+  }
+}
+
+class Cycling extends Workout {
+  type = 'cycling';
+
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
+    this.elevationGain = elevationGain;
+    // this.type = 'cycling';
+    this.calcSpeed();
+    this._setDescription();
+  }
+
+  calcSpeed() {
+    // km/h
+    this.speed = this.distance / (this.duration / 60);
+    return this.speed;
+  }
+}
+
+>>>>>>> 5dcda15029d358c1547659e1ac9062775080d904
 
   constructor(coords, distance, duration) {
     this.distance = distance;
@@ -273,6 +336,7 @@ _renderWorkout(workout){
     </li>
     `;
 
+<<<<<<< HEAD
     if (workout.type === 'cycling')
       html += `
         <div class="workout__details">
@@ -339,3 +403,27 @@ _setLocalStorage() {
 
 
 const app = new App();
+=======
+    // Empty inputs
+    inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value =
+      '';
+    const {lat,lng}= mapEvent.latlng
+
+        L.marker([lat,lng]).addTo(map)
+        .bindPopup(L.popup({
+            maxWidth:250,
+            minWidth:100,
+            autoClose : false,
+            closeOnClick:false,
+            className: 'running-popup'
+        }))
+        .setPopupContent('workout')
+        .openPopup();
+
+})
+
+inputType.addEventListener('change', function(){
+    inputElevation.closest('.form__row').classList.toggle('form__row--hidden')
+    inputCadence.closest('.form__row').classList.toggle('form__row--hidden')
+})
+>>>>>>> 5dcda15029d358c1547659e1ac9062775080d904
