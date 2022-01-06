@@ -2,10 +2,8 @@
 
 class Workout {
   date = new Date();
-<<<<<<< HEAD
   id = (Date.now() + "").slice(-10);
   clicks = 0;
-=======
   id = (Date.now() + '').slice(-10);
   clicks = 0;
 
@@ -66,7 +64,6 @@ class Cycling extends Workout {
   }
 }
 
->>>>>>> 5dcda15029d358c1547659e1ac9062775080d904
 
   constructor(coords, distance, duration) {
     this.distance = distance;
@@ -151,7 +148,6 @@ class App {
   #workouts = [];
   constructor() {
     this._getPosition();
-
     this._getLocalStorage();
 
 
@@ -161,7 +157,7 @@ class App {
     form.addEventListener("submit", this._newWorkout.bind(this));
     inputType.addEventListener("change", this._toggleElevationFeild);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
-  }
+}
 
   _getPosition() {
     if (navigator.geolocation)
@@ -222,7 +218,7 @@ _showForm(mapE) {
     inputCadence.closest(".form__row").classList.toggle("form__row--hidden");
     }
 
-    _newWorkout(e) {
+_newWorkout(e) {
         
     e.preventDefault();
 
@@ -261,7 +257,7 @@ _showForm(mapE) {
 
     //Add new object to workout array
   this.#workouts.push(workout)
-  console.log(workout);
+//   console.log(workout);
   
     //Render workout on map as marker
     this._renderWorkoutMarker(workout)
@@ -269,17 +265,8 @@ _showForm(mapE) {
     //Render the workouts on the list
     this._renderWorkout(workout);
 
-    //Hide form
+    //Hide form i.e clear input fields
     this._hideForm();
-
-
-    //clear input fields
-
-    inputDistance.value =
-      inputDuration.value =
-      inputCadence.value =
-      inputElevation.value =
-        "";
 
      // Set local storage to all workouts
     this._setLocalStorage();
@@ -336,7 +323,7 @@ _renderWorkout(workout){
     </li>
     `;
 
-<<<<<<< HEAD
+
     if (workout.type === 'cycling')
       html += `
         <div class="workout__details">
@@ -403,27 +390,5 @@ _setLocalStorage() {
 
 
 const app = new App();
-=======
-    // Empty inputs
-    inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value =
-      '';
-    const {lat,lng}= mapEvent.latlng
 
-        L.marker([lat,lng]).addTo(map)
-        .bindPopup(L.popup({
-            maxWidth:250,
-            minWidth:100,
-            autoClose : false,
-            closeOnClick:false,
-            className: 'running-popup'
-        }))
-        .setPopupContent('workout')
-        .openPopup();
 
-})
-
-inputType.addEventListener('change', function(){
-    inputElevation.closest('.form__row').classList.toggle('form__row--hidden')
-    inputCadence.closest('.form__row').classList.toggle('form__row--hidden')
-})
->>>>>>> 5dcda15029d358c1547659e1ac9062775080d904
